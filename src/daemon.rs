@@ -60,15 +60,15 @@ fn read_cookie(path: &Path) -> Result<(String, String)> {
     // * https://github.com/bitcoin/bitcoin/pull/6388/commits/71cbeaad9a929ba6a7b62d9b37a09b214ae00c1a
     // * https://bitcoin.stackexchange.com/questions/46782/rpc-cookie-authentication
     let mut file = File::open(path)
-        .with_context(|| format!("failed to open bitcoind cookie file: {}", path.display()))?;
+        .with_context(|| format!("failed to open litecoind cookie file: {}", path.display()))?;
     let mut contents = String::new();
     file.read_to_string(&mut contents)
-        .with_context(|| format!("failed to read bitcoind cookie from {}", path.display()))?;
+        .with_context(|| format!("failed to read litecoind cookie from {}", path.display()))?;
 
     let parts: Vec<&str> = contents.splitn(2, ':').collect();
     ensure!(
         parts.len() == 2,
-        "failed to parse bitcoind cookie - missing ':' separator"
+        "failed to parse litecoind cookie - missing ':' separator"
     );
     Ok((parts[0].to_owned(), parts[1].to_owned()))
 }
@@ -109,10 +109,10 @@ impl Daemon {
         loop {
             exit_flag
                 .poll()
-                .context("bitcoin RPC polling interrupted")?;
+                .context("litecoin RPC polling interrupted")?;
             match rpc_poll(&mut rpc) {
                 PollResult::Done(result) => {
-                    result.context("bitcoind RPC polling failed")?;
+                    result.context("litecoind RPC polling failed")?;
                     break; // on success, finish polling
                 }
                 PollResult::Retry => {
@@ -123,14 +123,14 @@ impl Daemon {
 
         let network_info = rpc.get_network_info()?;
         if network_info.version < 21_00_00 {
-            bail!("electrs requires bitcoind 0.21+");
+            bail!("electrs requires litecoind 0.21+");
         }
         if !network_info.network_active {
-            bail!("electrs requires active bitcoind p2p network");
+            bail!("electrs requires active litecoind p2p network");
         }
         let info = rpc.get_blockchain_info()?;
         if info.pruned {
-            bail!("electrs requires non-pruned bitcoind node");
+            bail!("electrs requires non-pruned litecoind node");
         }
 
         let p2p = Mutex::new(Connection::connect(

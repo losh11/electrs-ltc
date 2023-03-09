@@ -2,7 +2,7 @@
 set -euo pipefail
 
 rm -rf data/
-mkdir -p data/{bitcoin,electrum,electrs}
+mkdir -p data/{litecoin,electrum,electrs}
 
 cleanup() {
   trap - SIGTERM SIGINT
@@ -16,7 +16,7 @@ cleanup() {
 }
 trap cleanup SIGINT SIGTERM EXIT
 
-BTC="bitcoin-cli -regtest -datadir=data/bitcoin"
+BTC="litecoin-cli -regtest -datadir=data/litecoin"
 ELECTRUM="electrum --regtest"
 EL="$ELECTRUM --wallet=data/electrum/wallet"
 
@@ -24,8 +24,8 @@ tail_log() {
 	tail -n +0 -F $1 || true
 }
 
-echo "Starting $(bitcoind -version | head -n1)..."
-bitcoind -regtest -datadir=data/bitcoin -printtoconsole=0 &
+echo "Starting $(litecoind -version | head -n1)..."
+litecoind -regtest -datadir=data/litecoin -printtoconsole=0 &
 BITCOIND_PID=$!
 
 $BTC -rpcwait getblockcount > /dev/null
@@ -42,7 +42,7 @@ TIP=`$BTC getbestblockhash`
 export RUST_LOG=electrs=debug
 electrs \
   --db-dir=data/electrs \
-  --daemon-dir=data/bitcoin \
+  --daemon-dir=data/litecoin \
   --network=regtest \
   2> data/electrs/regtest-debug.log &
 ELECTRS_PID=$!
@@ -77,7 +77,7 @@ test "`$EL getaddresshistory $NEW_ADDR | jq -c .`" == "[{\"fee\":100000,\"height
 echo " * getbalance"
 test "`$EL getbalance | jq -c .`" == '{"confirmed":"549.999","unmatured":"4950"}'
 
-echo "Generating bitcoin block..."
+echo "Generating litecoin block..."
 $BTC generatetoaddress 1 $MINING_ADDR > /dev/null
 $BTC getblockcount > /dev/null
 

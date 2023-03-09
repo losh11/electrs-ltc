@@ -173,7 +173,7 @@ fn default_daemon_dir() -> PathBuf {
         eprintln!("Error: unknown home directory");
         std::process::exit(1)
     });
-    home.push(".bitcoin");
+    home.push(".litecoin");
     home
 }
 
@@ -197,7 +197,7 @@ impl Config {
                 .unwrap_or_exit();
 
         let db_subdir = match config.network {
-            Network::Bitcoin => "bitcoin",
+            Network::Bitcoin => "litecoin",
             Network::Testnet => "testnet",
             Network::Regtest => "regtest",
             Network::Signet => "signet",
@@ -206,20 +206,20 @@ impl Config {
         config.db_dir.push(db_subdir);
 
         let default_daemon_rpc_port = match config.network {
-            Network::Bitcoin => 8332,
-            Network::Testnet => 18332,
-            Network::Regtest => 18443,
-            Network::Signet => 38332,
+            Network::Bitcoin => 9332,
+            Network::Testnet => 19332,
+            Network::Regtest => 19443,
+            Network::Signet => 39332,
         };
         let default_daemon_p2p_port = match config.network {
-            Network::Bitcoin => 8333,
-            Network::Testnet => 18333,
-            Network::Regtest => 18444,
-            Network::Signet => 38333,
+            Network::Bitcoin => 9333,
+            Network::Testnet => 19335,
+            Network::Regtest => 19444,
+            Network::Signet => 39333,
         };
         let default_electrum_port = match config.network {
             Network::Bitcoin => 50001,
-            Network::Testnet => 60001,
+            Network::Testnet => 51001,
             Network::Regtest => 60401,
             Network::Signet => 60601,
         };
@@ -273,7 +273,7 @@ impl Config {
 
         match config.network {
             Network::Bitcoin => (),
-            Network::Testnet => config.daemon_dir.push("testnet3"),
+            Network::Testnet => config.daemon_dir.push("testnet4"),
             Network::Regtest => config.daemon_dir.push("regtest"),
             Network::Signet => config.daemon_dir.push("signet"),
         }

@@ -327,7 +327,7 @@ fn build_version_message() -> NetworkMessage {
         receiver: address::Address::new(&addr, services),
         sender: address::Address::new(&addr, services),
         nonce: secp256k1::rand::thread_rng().gen(),
-        user_agent: format!("/electrs:{}/", ELECTRS_VERSION),
+        user_agent: format!("/electrs-ltc:{}/", ELECTRS_VERSION),
         start_height: 0,
         relay: false,
     })

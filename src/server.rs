@@ -111,7 +111,7 @@ fn serve() -> Result<()> {
                 recv(new_block_rx) -> result => match result {
                     Ok(_) => (), // sync and update
                     Err(_) => {
-                        info!("disconnected from bitcoind");
+                        info!("disconnected from litecoind");
                         return Ok(());
                     }
                 },

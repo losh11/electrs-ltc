@@ -10,6 +10,6 @@ shift
 
 DB=./db
 export RUST_LOG=${RUST_LOG-electrs=INFO}
-target/release/electrs --network $NETWORK --db-dir $DB --daemon-dir $HOME/.bitcoin $*
+target/release/electrs --network $NETWORK --db-dir $DB --daemon-dir $HOME/.litecoin $*
 
 # use SIGINT to quit

@@ -43,7 +43,7 @@ def main():
         from pycoin.symbols.xtn import network
     elif args.network == 'mainnet':
         port = 50001
-        from pycoin.symbols.btc import network
+        from pycoin.symbols.ltc import network
     else:
         raise ValueError(f"unknown network: {args.network}")
 

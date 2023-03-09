@@ -3,5 +3,5 @@
 use anyhow::Result;
 
 fn main() -> Result<()> {
-    electrs::run()
+    electrs_ltc::run()
 }

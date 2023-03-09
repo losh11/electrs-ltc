@@ -56,7 +56,7 @@ impl Signal {
     pub fn new() -> Signal {
         let ids = [
             SIGINT, SIGTERM,
-            SIGUSR1, // allow external triggering (e.g. via bitcoind `blocknotify`)
+            SIGUSR1, // allow external triggering (e.g. via litecoind `blocknotify`)
         ];
         let (tx, rx) = unbounded();
         let result = Signal {

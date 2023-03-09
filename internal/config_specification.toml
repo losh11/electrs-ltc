@@ -32,7 +32,7 @@ default = "\"./db\".into()"
 [[param]]
 name = "daemon_dir"
 type = "std::path::PathBuf"
-doc = "Data directory of Bitcoind (default: ~/.bitcoin/)"
+doc = "Data directory of Litecoind (default: ~/.litecoin/)"
 default = "crate::config::default_daemon_dir()"
 
 [[param]]
@@ -46,7 +46,7 @@ env_var = false
 [[param]]
 name = "cookie_file"
 type = "std::path::PathBuf"
-doc = "JSONRPC authentication cookie file (default: ~/.bitcoin/.cookie)"
+doc = "JSONRPC authentication cookie file (default: ~/.litecoin/.cookie)"
 # This is safe to configure on command line.
 
 [[param]]
@@ -64,11 +64,11 @@ doc = "Electrum server JSONRPC 'addr:port' to listen on (default: '127.0.0.1:500
 [[param]]
 name = "daemon_rpc_addr"
 type = "crate::config::ResolvAddr"
-doc = "Bitcoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet, 127.0.0.1:18443 for regtest and 127.0.0.1:18554 for signet)"
+doc = "Litecoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:9332 for mainnet, 127.0.0.1:19332 for testnet, 127.0.0.1:19443 for regtest and 127.0.0.1:19554 for signet)"
 [[param]]
 name = "daemon_p2p_addr"
 type = "crate::config::ResolvAddr"
-doc = "Bitcoin daemon p2p 'addr:port' to connect (default: 127.0.0.1:8333 for mainnet, 127.0.0.1:18333 for testnet, 127.0.0.1:18444 for regtest and 127.0.0.1:38333 for signet)"
+doc = "Litecoin daemon p2p 'addr:port' to connect (default: 127.0.0.1:9333 for mainnet, 127.0.0.1:19335 for testnet, 127.0.0.1:19444 for regtest and 127.0.0.1:39333 for signet)"
 
 [[param]]
 name = "monitoring_addr"
